@@ -43,7 +43,7 @@ class BookView @JvmOverloads constructor(
          * 这里我们先画了A再画了C，重合部分会减掉并且是A的颜色
          * 所以画C其实把A又画了一遍
          */
-        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_ATOP);
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_ATOP)
     }
     private val pathC = Path()
 
@@ -54,7 +54,7 @@ class BookView @JvmOverloads constructor(
     private val pathBPaint = Paint().apply {
         color = Color.GREEN
         isAntiAlias = true
-        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_ATOP);
+        xfermode = PorterDuffXfermode(PorterDuff.Mode.DST_ATOP)
     }
     private val pathB = Path()
 
@@ -197,20 +197,20 @@ class BookView @JvmOverloads constructor(
             once = false
         }
         //每次绘测前把之前的数据清楚
-        bitmapCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR);
+        bitmapCanvas.drawColor(Color.TRANSPARENT, PorterDuff.Mode.CLEAR)
 
         /**
          * 分别绘制ABC
          * A有两种情况，一个是f位于右下角一个是f位于右上角
          */
         if (f.x == viewWidth && f.y == 0f) {
-            bitmapCanvas.drawPath(getPathAFromTopRight(), pathAPaint);
+            bitmapCanvas.drawPath(getPathAFromTopRight(), pathAPaint)
         }
         if (f.x == viewWidth && f.y == viewHeight) {
-            bitmapCanvas.drawPath(getPathAFromBottomRight(), pathAPaint);
+            bitmapCanvas.drawPath(getPathAFromBottomRight(), pathAPaint)
         }
-        bitmapCanvas.drawPath(getPathC(), pathCPaint);
-        bitmapCanvas.drawPath(getPathB(), pathBPaint);
+        bitmapCanvas.drawPath(getPathC(), pathCPaint)
+        bitmapCanvas.drawPath(getPathB(), pathBPaint)
         canvas.drawBitmap(bitmap!!, 0f, 0f, null)
 
     }
@@ -296,32 +296,6 @@ class BookView @JvmOverloads constructor(
 
         c.x = e.x - (f.x - e.x) / 2
         c.y = f.y
-
-        j.x = f.x
-        j.y = h.y - (f.y - h.y) / 2
-
-        b = getIntersectionPoint(a, e, c, j)
-        k = getIntersectionPoint(a, h, c, j)
-
-        d.x = (c.x + 2 * e.x + b.x) / 4
-        d.y = (2 * e.y + c.y + b.y) / 4
-
-        i.x = (j.x + 2 * h.x + k.x) / 4
-        i.y = (2 * h.y + j.y + k.y) / 4
-    }
-
-    private fun calculatePoints1(a: PointF, f: PointF) {
-        g.x = (a.x + f.x) / 2
-        g.y = (a.y + f.y) / 2
-
-        e.x = g.x - (f.y - g.y) * (f.y - g.y) / (f.x - g.x)
-        e.y = f.y
-
-        h.x = f.x
-        h.y = g.y - (f.x - g.x) * (f.x - g.x) / (f.y - g.y)
-
-        c.x = 0f
-        c.y = viewHeight
 
         j.x = f.x
         j.y = h.y - (f.y - h.y) / 2
